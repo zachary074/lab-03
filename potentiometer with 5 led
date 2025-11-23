@@ -1,0 +1,41 @@
+/*
+  Goal:
+    - Read an analog value from pin A0.
+    - Compare the value to a threshold (512).
+    - Turn ON or OFF a group of LEDs depending on the sensor value.
+  Theme:
+    Analog input reading, conditional logic, and digital output control.
+*/
+// Create a variable that stores the analog input pin number
+int sensorPin = A0;
+void setup() {
+  // This function runs once when the Arduino is powered ON or reset
+  Serial.begin(9600);      // Start serial communication at 9600 baud for debugging output
+  pinMode(6, OUTPUT);      // Set pin 6 as an output (LED or device)
+  pinMode(5, OUTPUT);      // Set pin 5 as an output
+  pinMode(4, OUTPUT);      // Set pin 4 as an output
+  pinMode(3, OUTPUT);      // Set pin 3 as an output
+  pinMode(2, OUTPUT);      // Set pin 2 as an output
+}
+void loop() {
+  // This function repeats forever
+  int sensorValue = analogRead(sensorPin);    // Read the analog value (0–1023) from pin A0
+  Serial.print("sensorValue = ");             // Print a label for the reading
+  Serial.println(sensorValue);                // Print the actual sensor value
+  // If the sensor value is below 512 (about half of 1023)
+  if (sensorValue < 512) {
+    digitalWrite(2, HIGH);   // Turn ON LED/device on pin 2
+    digitalWrite(3, HIGH);   // Turn ON LED/device on pin 3
+    digitalWrite(4, HIGH);   // Turn ON LED/device on pin 4
+    digitalWrite(5, LOW);    // Turn OFF LED/device on pin 5
+    digitalWrite(6, LOW);    // Turn OFF LED/device on pin 6
+  }
+  // Otherwise, if the value is 512 or higher
+  else {
+    digitalWrite(2, LOW);    // Turn OFF pin 2
+    digitalWrite(3, LOW);    // Turn OFF pin 3
+    digitalWrite(4, LOW);    // Turn OFF pin 4
+    digitalWrite(6, HIGH);   // Turn ON pin 6
+    digitalWrite(5, HIGH);   // Turn ON pin 5
+  }
+}
