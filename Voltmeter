@@ -1,0 +1,21 @@
+* 
+  Goal: This program reads an analog value from pin A0, converts it to
+        the corresponding voltage (0–5V), and prints that voltage.
+  Theme: Analog-to-digital conversion (ADC) and voltage calculation.
+*/
+// Runs once when the Arduino is powered on or reset
+void setup() {
+  // Starts serial communication at a baud rate of 9600
+  Serial.begin(9600);
+}
+void loop() {
+  // Reads the analog voltage on pin A0 (returns 0–1023)
+  int V = analogRead(A0);
+  // Converts the raw analog reading into voltage (0V to ~5V)
+  // Formula: (ADC value) * (Reference Voltage / Max ADC value)
+  float VA = V * (5.00 / 1023.0);
+  // Prints "VA =" without ending the line
+  Serial.print("VA = ");
+  // Prints the calculated voltage and ends the line
+  Serial.println(VA);
+}
