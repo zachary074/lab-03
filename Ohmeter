@@ -1,0 +1,24 @@
+/* 
+  Goal:
+    - Read an analog voltage from pin A0.
+    - Convert ADC reading to actual voltage.
+    - Calculate current through a known resistor (10kΩ).
+    - Calculate the resistance of an unknown resistor using Ohm's Law.
+  Theme:
+    Analog sensor reading, Ohm's Law calculations, and real-time data display.
+*/
+void setup() {  
+  // This code runs once when the Arduino starts
+  Serial.begin(9600);        // Start serial communication at 9600 baud
+}
+void loop() {  
+  // This code repeats continuously
+  int V = analogRead(A0);                 // Read the raw ADC value (0–1023) from pin A0
+  float VA = V * (5.00 / 1023.0);         // Convert ADC value to voltage (0–5V)
+  float I = ((5.00 - VA) / 10000.0);      // Calculate current using Ohm's Law: I = (Vsource − Vmeasured) / Rknown
+  float R = (VA / I);                     // Calculate resistance of unknown resistor: R = V / I
+  Serial.print("Resistance = ");          // Print label for resistance output
+  Serial.println(R);                      // Print calculated resistance in ohms
+  Serial.print("VA = ");                  // Print label for voltage output
+  Serial.println(VA);                     // Print the measured voltage
+}
