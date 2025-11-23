@@ -1,0 +1,19 @@
+/* 
+  Goal: This program reads the raw analog value (0–1023) from pin A0 
+        and displays it in the Serial Monitor.
+  Theme: Analog input processing and basic sensor data display.
+*/
+// Runs once when the Arduino is powered on or reset
+void setup() {
+  // Starts serial communication at a baud rate of 9600
+  Serial.begin(9600);
+}
+// Runs repeatedly while the Arduino is powered
+void loop() {
+  // Reads the analog voltage on pin A0 and stores it in variable V
+  int V = analogRead(A0);
+  // Prints the text "SensorValue = " without a newline
+  Serial.print("SensorValue = ");
+  // Prints the value stored in V, followed by a newline
+  Serial.println(V);
+}
